@@ -1,0 +1,250 @@
+% !TEX root = Ch1.tex
+
+\section{Chapter 1 Exercises}
+
+\begin{exe}[2.2]
+\[8, 4, 2, 0, 0, 0, \cdots\]
+\[I_1\]
+\[8, 4, 2, 0, 0, 0, \cdots\]
+\[I_2\]
+\[8, 5, 2, 0, 0, 0, \cdots\]
+\[I_3\]
+\[8, 5, 3, 0, 0, 0, \cdots\]
+\[I_4, \text{don't jump}\]
+\[8, 5, 3, 0, 0, 0, \cdots\]
+\[I_5, \text{jump to 2}\]
+\[8, 5, 3, 0, 0, 0, \cdots\]
+\[I_2\]
+\[8, 6, 3, 0, 0, 0, \cdots\]
+\[I_3\]
+\[8, 6, 4, 0, 0, 0, \cdots\]
+\[I_4, \text{don't jump}\]
+\[8, 6, 4, 0, 0, 0, \cdots\]
+\[I_5, \text{jump to 2}\]
+\[8, 6, 4, 0, 0, 0, \cdots\]
+\[I_2\]
+\[8, 7, 4, 0, 0, 0, \cdots\]
+\[I_3\]
+\[8, 7, 5, 0, 0, 0, \cdots\]
+\[I_4, \text{don't jump}\]
+\[8, 7, 5, 0, 0, 0, \cdots\]
+\[I_5, \text{jump to 2}\]
+\[8, 7, 5, 0, 0, 0, \cdots\]
+\[I_2\]
+\[8, 8, 5, 0, 0, 0, \cdots\]
+\[I_3\]
+\[8, 7, 6, 0, 0, 0, \cdots\]
+\[I_4, \text{jump to 6}\]
+\[8, 7, 6, 0, 0, 0, \cdots\]
+\[I_6\]
+\[6, 7, 6, 0, 0, 0, \cdots\]
+    
+\end{exe}
+\begin{exe}[2.3]
+We proceed with a proof by induction. After executing each instruction, we want to show that $r_1 < r_2$ and the program does not terminate. Consider the first executed instruction, $J(1, 2, 6)$. Since $2 < 3$, we do not jump and $r_1 < r_2$. Suppose the program has not terminated after instruction n, and $r_1 < r_2$. Consider instruction $n+1$. The instruction must be $S(2), S(3), J(1, 2, 6), J(1, 1, 2), T(3, 1)$. \\
+Case 1: $S(2)$. Then we have that $r_1 < r_2 < r_2 + 1$. There is a next instruction, so this case is solved.\\
+Case 2: $S(3)$. Since $r_1, r_2$ are not affected, it remains that $r_1 < r_2$. The next line is instruction 4, so the program does not terminate.\\
+Case 3: $J(1, 2, 6)$. Since $r_1 < r_2$, by the induction hypothesis, we do not jump, and instead run instruction 5. It remains that $r_1 < r_2$\\
+Case 4: $J(1, 1, 2)$. Since jumps do not affect our registers, $r_1 < r_2$ remains. In addition, we jump to instruction 2, so the program does not terminate.\\
+Case 5: $T(3,1)$. For the instruction to have fired, we must be on line 6. Since line 5 always jumps to line 2, it is the case that we must have executed $J(1, 2, 6)$ previously. However, $r_1 < r_2$ for the previous step, so this case is invalid.\\\\
+Thus after executing $n + 1$ instructions, the program does not terminate. Thus the program wil never terminate.
+\end{exe}
+\begin{exe}[3.3.1a]
+    \[I_1: J(1, 2, 5)\]
+    Checks if $x = 0$
+    \[I_2: S(2)\]
+    If $x \neq 0$, add one
+    \[I_3: T(2, 1)\]
+    Move $1$ or $0$ into the output register
+\end{exe}
+\begin{exe}[3.3.1b]
+\[I_1: S(2)\]
+\[I_2: S(2)\]
+\[I_3: S(2)\]
+\[I_4: S(2)\]
+\[I_5: S(2)\]
+\[I_6: T(2, 1)\]
+This one is self-explanatory
+\end{exe}
+\begin{exe}[3.3.1c]
+\[I_1: J(1, 2, 3)\]
+Check if $x = y$
+\[I_2: S(3)\]
+If $x \neq y$, add one to register $3$
+\[I_3: T(3, 1)\]
+Move $0$ or $1$ to the output register
+\end{exe}
+\begin{exe}[3.3.1d]
+\[I_1: J(1, 2, 9)\]
+Check to see if $x = y$
+\[I_2: T(1, 3)\]
+Move $x$ to register 3
+\[I_3: T(2, 4)\]
+Move $y$ to register 4
+\[I_4: J(1, 2, 9)\]
+\[I_5: J(3, 4, 12)\]
+Check to see if $y + k = x$ or $x + k = y$
+\[I_6: S(1)\]
+\[I_7: S(4)\]
+Add one to $x$ and $y$
+\[I_8: J(1, 1, 4)\]
+Jump back to the checks
+\[I_9: T(5, 1)\]
+\[I_{10}: J(1, 1, 14)\]
+Put $0$ in the output register
+\[I_{12}: S(5)\]
+\[I_{13}: T(5, 1)\]
+Put $1$ in the output register
+\end{exe}
+\begin{exe}[3.3.1e]
+\[I_1: J(1, 3, 6)\]
+\[I_2: S(2)\]
+\[I_3: S(3)\]
+\[I_4: S(3)\]
+\[I_5: S(3)\]
+\[I_6: T(2, 1)\]
+\end{exe} 
+\begin{exe}[3.3.1f]
+\[I_1: J(1, 2, 6)\]
+\[I_2: S(2)\]
+\[I_3: S(3)\]
+\[I_4: S(3)\]
+\[I_5: J(1, 1, 1)\]
+\[I_6: T(3, 1)\]
+Getting $2X$ into the output register
+\[I_7: Z(2)\]
+\[I_8: Z(3)\]
+\[I_9: S(2)\]
+\[I_{10}: S(3)\]
+\[I_{11}: S(3)\]
+Setting up for $3k + 1, 3k + 2, 3k$
+\[I_{12}: J(1, 4, 25)\]
+\[I_{13}: S(2)\]
+\[I_{14}: S(2)\]
+\[I_{15}: S(2)\]
+\[I_{16}: S(3)\]
+\[I_{17}: S(3)\]
+\[I_{18}: S(3)\]
+\[I_{19}: S(4)\]
+\[I_{20}: S(4)\]
+\[I_{21}: S(4)\]
+\[I_{22}: J(1, 2, 25)\]
+\[I_{23}: J(1, 2, 25)\]
+\[I_{23}: J(1, 2, 25)\]
+If any are hit, it means the floor is found in register 4
+\[I_{24}: J(1, 1, 13)\]
+\[I_{25}: T(4, 1)\]
+Transfer register 4 to output
+
+
+\end{exe}
+\begin{exe}[3.3.2]
+\[f_P^{(2)}(x, y) = \begin{cases} 
+      x - y & x > y \\
+      \text{undefined} & \text{o/w} \\
+   \end{cases}\]
+\end{exe}
+\begin{exe}[3.3.3]
+We proceed via proof by induction. We want to prove that after executing $n$ instructions, for all registers $R_k$, we have that either $r_k = m$ or $r_k = x + a$. Since there are no jump instructions, we execute the same number instructions no matter what the input is. Consider $n = 0$. We have that $r_1 = x  = x + 0$ and $r_b = 0$, for $b \neq 1$. Suppose after executing $n$ instructions, for all $k \in \N$, we have that $r_k = m_k$ or $r_k = x + a_k$, for some $m_k$ and $a_k$. Consider the $n+1$th instruction.\\
+Case 1: It is $Z(s)$ for some $s \in \N$. Then $r_s = 0$ and the rest of the registers remain the same. Thus this case is closed.\\
+Case 2: It is $S(l)$ for some $l \in \N$. Then by the induction hypothesis, either $r_l = m_l$ or $r_l = x + a_l$. Then after applying the successor operation, $r_1 = m_l + 1$, still a constant or $r_l = x + (a_l + 1)$, still in the same form. The other registers remain the same.\\
+Case 3: $T(p, o)$. Now $r_o = r_p$, where $r_p = m_p$ or $r_p = x + a_p$. Thus we have proven the induction step for all three cases.\\
+Thus when the program terminates, the value at the output register is either $m$ or $x + a$ for some $m, a \in \N$. Since the value of $x$ was arbitrary, it must be the case that $f(x) = m$ for all $x \in \N$ or $f(x) = x + a$ for all $x \in \N$.
+\end{exe}
+\begin{exe}[3.3.4]
+\[I_1: Z(n)\]
+\[I_2: J(n, m, 5)\]
+\[I_3: S(n)\]
+\[I_4: J(1, 1, 2)\]
+
+\end{exe}
+\begin{exe}[4.3b]
+\[I_1: J(1, 2, 10)\]
+\[I_2: T(1, 3)\]
+\[I_3: T(2, 4)\]
+\[I_4: J(1, 2, 9)\]
+\[I_5: J(3, 4, 10)\]
+\[I_6: S(1)\]
+\[I_7: S(4)\]
+\[I_8: J(1, 1, 4)\]
+\[I_9: S(5)\]
+\[I_{10}: T(5, 1)\]
+\end{exe}
+\begin{exe}[4.3b]
+\[I_1: S(2)\]
+\[I_2: S(2)\]
+\[I_3: S(2)\]
+\[I_4: J(1, 2, 6)\]
+\[I_5: S(3)\]
+\[I_6: T(3, 1)\]
+\end{exe}
+\begin{exe}[4.3c]
+\[I_1: S(2)\]
+\[I_2: J(1, 2, 10)\]
+\[I_3: J(1, 3, 9)\]
+\[I_4: S(2)\]
+\[I_5: S(2)\]
+\[I_6: S(3)\]
+\[I_7: S(3)\]
+\[I_8: J(1, 1, 2)\]
+\[I_9 : S(4)\]
+\[I_{10}: T(4, 1)\]
+\end{exe}
+\begin{exe}[5.2.1]
+    \[
+        f \circ \alpha^{-1} (m) = \begin{cases}
+            m & \text{if } m \text{ is even}, \\
+            -(m+1) & \text{if } m \text{ is odd}.
+        \end{cases}
+        \]
+
+        \[
+            \alpha \circ f \circ \alpha^{-1} (m) = \begin{cases}
+                2m & \text{if } m \text{ is even}, \\
+                2m + 1 & \text{if } m \text{ is odd}.
+            \end{cases}
+            \]
+The set of instructions is as follows:
+\[I_1: J(1, 4, 6)\]
+\[I_2: S(4)\]
+\[I_3: S(5)\]
+\[I_4: S(5)\]
+\[I_5: J(1, 1, 1)\]
+\[I_6: S(2)\]
+\[I_7: J(1, 2, 14)\]
+\[I_8: J(1, 3, 15)\]
+\[I_9: S(2)\]
+\[I_{10}: S(2)\]
+\[I_{11}: S(3)\]
+\[I_{12}: S(3)\]
+\[I_{13}: J(1, 1, 7)\]
+\[I_{14}: S(5)\]
+\[I_{15}: T(5, 1)\]
+        
+\end{exe}
+\begin{exe}(5.2.2)
+    \[
+        f \circ \alpha^{-1} (m) = \begin{cases}
+            1 & \text{if } m \text{ is even}, \\
+            0 & \text{if } m \text{ is odd}.
+        \end{cases}
+        \]
+    \[
+            \alpha \circ f \circ \alpha^{-1} (m) = \begin{cases}
+                2 & \text{if } m \text{ is even}, \\
+                1 & \text{if } m \text{ is odd}.
+            \end{cases}
+    \]
+The set of instructions is as follows:  
+\[I_1: S(2)\]
+\[I_2: J(1, 2, 10)\]
+\[I_3: J(1, 3, 9)\]
+\[I_4: S(2)\]
+\[I_5: S(2)\]
+\[I_6: S(3)\]
+\[I_7: S(3)\]
+\[I_8: J(1, 1, 2)\]
+\[I_9 : S(4)\]
+\[I_{10}: S(4)\] 
+\[I_{11}: T(4, 1)\]
+\end{exe}
