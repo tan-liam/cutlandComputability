@@ -1,0 +1,113 @@
+% !TEX root = Ch2.tex
+
+\section{Chapter 2 Exercises}
+
+\begin{exe}[3.4.1a]
+The zero function is computable.
+Claim:
+\[f(x_1, x_2, \ldots, x_n) = x_1 + x_2 + \ldots + x_n\]
+is computable for $n \in \omega$ such that $n \geq 1$
+Base Case(s): We showed $f_2(x, y) = x+y$ was computable earlier in the book. It is also
+easy to show that $f_1(x) = x$ is computable.\\
+Induction Step: Assume that $f_n(x_1, x_2, \ldots, x_n) = x_1 + x_2 + \ldots + x_n$ is
+computable. Consider $g(x_1, \ldots, x_{n+1}) = x_1 + \ldots + x_{n+1}$. 
+\[g(x) = f_n(U_1^{n+1}(x), U_2^{n+1}(x), \ldots, U_{n-1}^{n+1}(x), a(x))\]
+\[a(x) = a(x_1, \ldots, x_{n+1}) = x_n + x_{n+1}\]
+Let us prove $a(x)$ is computable.
+\[a(x) = f_n(0, 0, \ldots, 0, U_n^{n+1}(x), U_{n+1}^{n+1}(x))\]
+By Theorem 3.1, since $f_n$ is computable, the zero function is computable,
+and the projection function is computable, $a(x)$ must be computable. By the same theorem, since $a(x)$
+is computable and the projection function is computable, $g$ must be computable.\\
+Consider
+\[m(x) = f_m(1, 1, \ldots, 1)\]
+Since $f_m$ is computable and $1$ is computable (simply the successor function), 
+$m$ is computable.
+\end{exe}
+\begin{exe}[3.4.1b]
+\[I(x) = x\]
+is clearly computable. 
+\[g(x) = f_m(I(x), \ldots, I(x)) = x + \ldots + x = mx\]
+We used the lemma proven in the previous part
+\end{exe}
+\begin{exe}[3.4.2]
+\[h(x) \simeq f(I(x), m(x))\]
+Since we showed $m$ and $I$ are computable, and we know $f$ is computable,
+by theorem 3.1, $h$ must be computable.
+\end{exe}
+\begin{exe}[3.4.3]
+We showed that 
+\[f(x, y) = \begin{cases}
+    0 & \text{if } x = y \\
+    1 & \text{if } x \neq y \\
+\end{cases}\]
+Consider the following function:
+\[h(x) = \begin{cases}
+    1 & \text{if } x = 0 \\
+    0 & \text{o/w}  \\
+\end{cases}\]
+We construct g with the following algorithm:
+\[I_1: S(3)\]
+\[I_2: J(1, 2, 5)\]
+\[I_3: T(2, 1)\]
+\[I_4: J(1, 1, 6)\]
+\[I_5: T(3, 1)\]
+Consider the function
+\[M(x, y) \simeq h(f^*(x, y))\]
+\[f^*(x, y) = f(g(x), U_2^n(x, y))\]
+Since g and the projection function are computable, $f^*$ is computable by Theorem 3.1.
+Then since h is computable and $f^*$ is computable, then $M(x,y)$ is computable.
+
+Putting it all together
+\[f^*(x, y) = \begin{cases}
+    0 & \text{if } g(x) = y\\
+    1 & \text{if } g(x) \neq y
+\end{cases}\]
+\[M(x, y) \simeq h(f^*(x, y)) = \begin{cases}
+    1 & \text{if } g(x) = y\\
+    0 & \text{if } g(x) \neq y
+\end{cases}\]
+\end{exe}
+\begin{exe}[4.16.1a]
+\[f(x, z) = \Pi_{u < z} x = x^z\]
+\[g(x, z) = a_zf(x, z) = a_zx^z\]
+\[h(x) = \sum_{z \leq n} g(x, z) \]
+\end{exe}
+\begin{exe}[4.16.1b]
+\[\floor*{\sqrt{x}} = (\mu z < x(z^2 > x)) \dotdiv 1\]
+\end{exe}
+\begin{exe}[4.16.1c]
+    \[LCM(x, y) = \mu z < xy (\text{div}(x, z) \text{ and } \text{div}(y, z))\]
+\end{exe}
+\begin{exe}[4.16.1d]
+    \[HCF(x, y) = qt(LCM(x, y), xy)\]
+\end{exe}
+\begin{exe}[4.16.1e]
+    \[\sum_{z < x} pr(z)div(z, x)\]
+\end{exe}
+\begin{exe}[4.16.1f]
+    \[\sum_{z < x} \bar{sg}(|1 - HCF(x, z)|)\]
+\end{exe}
+\begin{exe}[4.16.3]
+    \[g(0) = 6\]
+    \[g(x + 1) = 2^{(g(x))_2}3^{(g(x))_1 + (g(x))_2}\]
+    \[f(x) = (g(x))_1\]
+\end{exe}
+\begin{exe}[4.16.4a]
+\[\bar{sg}(div(2, x))\]
+\end{exe}
+\begin{exe}[4.16.4b]
+    \[\bar{sg}(|1 - \sum_{z \leq x} pr(z)div(z, x)|)\]
+\end{exe}
+\begin{exe}[4.16.4c]
+    \[\exists z < x (\bar{sg}(|z^3 - x|))\]
+\end{exe}
+
+\begin{exe}[5.4.1]
+    \[\mu z (\bar{\text{sg}}(|y - f(z)|))\]
+\end{exe}
+\begin{exe}[5.4.2]
+    \[\mu z (p(z) - a)\]
+\end{exe}
+\begin{exe}[5.4.2]
+    \[\mu z (\text{sg}(z)\bar{\text{sg}}(|zy - x|))\]
+\end{exe}
