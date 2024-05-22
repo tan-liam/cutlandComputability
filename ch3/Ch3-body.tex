@@ -1,0 +1,24 @@
+% !TEX root = Ch3.tex
+
+\section{Chapter 3 Exercises}
+
+\begin{exe}[4.6.1]
+\[\floor*{\frac{x+1}{2}}\]
+We are turning every other one to a zero.
+\end{exe}
+\begin{exe}[4.6.2]
+\[q_1, 1, 0, q_2\]
+\[q_1, 0, R, q_1\]
+\[q_1, B, L, q_4\]
+\[q_2, B, 1, q_3\]
+\[q_2, 1, L, q_2\]
+\[q_2, 0, L, q_2\]
+\[q_3, 1, R, q_3\]
+\[q_3, 0, R, q_1\]
+\[q_4, 0, 1, q_5\]
+\[q_5, 1, L, q_4\]
+Essentially this algorithm changes a one to a zero, moves to the left, copies the one down, 
+moves back to the right to change each one to a zero. At the end it replaces all the 
+zeros with ones
+\end{exe}
+    
